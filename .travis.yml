@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+- 8.11.3
+cache:
+  yarn: true
+  directories:
+  - node_modules
+  - client/node_modules
+  - server/node_modules
+before_install:
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.5.1
+- export PATH="$HOME/.yarn/bin:$PATH"
+jobs:
+  include:
+  - stage: Test, Build and Deploy
+    branch:
+      on:
+      - master
+      - dev
+    script:
+    - yarn test
+    - yarn build
+    deploy:
+      provider: heroku
+      app: cowcowcow
+      api_key:
+        secure: 
+deploy:
+  api_key:
+    secure: WyQFaWB4CVd+Ly6cQ+l7GW1tLyCNoK+siQfe5mHUmsZS2W8JiMY1UxRy+vJSt+RuxwTqPW940fYsmtOznPlfv3fJLvdO7+VT0YFOqp5VULURKwJLM6YfEEFzWk5GaXtyAF+zxeVX3wx4T2ah8q5gza4dRbnwrvUvlhZtKAyLhhbEuvu9Yvut9ff7SvJJeaUMVYPlR4/VAPZp2dyVCGFb+lDmoD64nA6q6/SzyKdffmgrZSJhsGGqi6GWs/QOqYnqzan/bIWEvgiaH3QvseCuQXUAtgicXNJ6bvSIY5++V2Z3UJUzHayKSMrBGH6ixL51xNhf5tHDZ8lqS9HawpGA9NpNjfsk9nlqKWe4VZ5fAavTRdWxnreHAwh6fYpDqkE7P/jb69JU8+G8R+3JWXMDyVf6nzw4SrldE+4DGyOcPOt1tgcct+SRr8OMDCzdEchTbK2sXZxP0D2xvlu710AdwLsre/stXVphdsYKnvqGaIsxB20cG2i7xmPik+Tjx7WVMCdhlDmZbmNh2dvD2Y9nTPGFuot7C7nSkflRW2CvYguMyoR4v4CPeKw+y11ik1sgg8XwSfq6uzA3Qcq3jPiFL5gS0Z1tYm52VmWzL1V0RVCdtiPl8p3mFhnXI8NGbZCm7JiXOlvTmtyBQ+KlngFE569oj+sR5doistg5ehgJR8Q=
