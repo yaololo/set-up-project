@@ -1,7 +1,7 @@
 {
   "name": "set-up-project",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./server/index.js",
   "repository": "git@github.com:yaololo/set-up-project.git",
   "author": "zhuangyongming <yongming.zhuang@moneysmart.com>",
   "license": "MIT",
