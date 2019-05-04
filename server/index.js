@@ -5,6 +5,7 @@ const path = require('path');
 
 // Create the server
 const app = express();
+let server = {};
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -37,6 +38,10 @@ app.get('*', (req, res) => {
 
 // Choose the port and start the server
 const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
-  console.log(`Mixing it up on port ${PORT}`)
-})
+server.start = () => {
+  app.listen(PORT, () => {
+    console.log(`Mixing it up on port ${PORT}`);
+  });
+};
+
+module.exports = server;
