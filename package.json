@@ -9,15 +9,20 @@
     "install": "cd client&&yarn",
     "test": "cd client&&yarn test",
     "build": "cd client && yarn install && yarn build",
-    "start": "node index.js",
+    "start": "cd server && node index.js",
     "start:client": "cd client && yarn start",
     "start:server:dev": "nodemon index.js",
-    "heroku-postbuild": "yarn build"
+    "heroku-postbuild": "yarn build",
+    "start:db": "mongod --dbpath server/db/data"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "cowsay": "^1.4.0",
     "express": "^4.16.4",
     "nodemon": "^1.19.0"
+  },
+  "devDependencies": {
+    "eslint-config-react-app": "^4.0.0",
+    "eslint-plugin-react": "^7.13.0"
   }
 }
