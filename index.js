@@ -1,7 +1,3 @@
-// const server = require('./server');
-
-// server.start();
-
 const express = require('express');
 const cowsay = require('cowsay');
 const cors = require('cors');
@@ -9,7 +5,6 @@ const path = require('path');
 
 // Create the server
 const app = express();
-// let server = {};
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -45,4 +40,3 @@ const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
   console.log(`Mixing it up on port ${PORT}`);
 });
-
