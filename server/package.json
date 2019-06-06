@@ -4,6 +4,9 @@
   "author": "zhuangyongming <yongming.zhuang@moneysmart.com>",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "dotenv": "^8.0.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.6"
   }
 }
