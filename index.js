@@ -2,7 +2,7 @@ const express = require('express');
 const cowsay = require('cowsay');
 const cors = require('cors');
 const path = require('path');
-const routes = require('./server/api');
+const routes = require('./server/route');
 
 // Create the server
 const app = express();
