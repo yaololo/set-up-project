@@ -1,33 +1,30 @@
+const formatDbError = require('./shared/errorformatter');
 const User = require('../schemas/user');
+const jwt = require('jsonwebtoken');
 
 const signupController = async function(req, res) {
-  let user = new User();
+  let password = req.body.password;
+  if(typeof password !== 'string') {
+    return res.status(401).json({ error: { type: 'Validation Error', msg: 'password must be a string' } })
+  }
 
+  let user = new User();
   user.email = req.body.email;
   user.name = req.body.name;
-  user.password = req.body.password;
+  user.setHashedPassword(password);
 
   try {
     await user.save();
-    res.send({ userInfo: user });
+    let userInfo = user.toJSON();
+    let token = jwt.sign(userInfo, process.env.PRIVATE_KEY,  { expiresIn: '2h' });
+
+    // set token to cookie
+    res.cookie('token', token, { httpOnly: true, sameSite: 'Lax' });
+    return res.send({ userInfo });
   } catch (error) {
     let formattedError = formatDbError(error);
-
-    res.status(401).json({ error: formattedError });
+    return res.status(401).json({ error: formattedError });
   }
 }
-
-const formatDbError = (error) => {
-  let formattedError = {
-    name: error.name,
-    msg: error.errmsg
-  };
-
-  if(error.name === 'ValidationError') {
-    formattedError.msg = error.message;
-  }
-
-  return formattedError;
-};
 
 module.exports = signupController;
