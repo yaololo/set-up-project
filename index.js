@@ -30,7 +30,6 @@ app.get("/api/cow/", cors(), async (req, res, next) => {
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
-  console.log('called')
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
