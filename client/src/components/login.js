@@ -1,24 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-// import {
-//   Container,
-//   Col,
-//   Form,
-//   FormGroup,
-//   InputGroup,
-//   Button,
-//   FormControl
-// } from "react-bootstrap";
 
 import {
   Container,
   Col,
   Button,
   FormGroup,
-  FormControl,
-  ControlLabel,
   Form
 } from "react-bootstrap";
+
 
 class Login extends Component {
   constructor(props) {
@@ -60,8 +50,6 @@ class Login extends Component {
 
   render() {
     const { email, password } = this.state;
-    // const { Label } = InputGroup;
-    const { FormFeedback } = FormControl;
     return (
       <LoginWrapper>
         <Container className="App">

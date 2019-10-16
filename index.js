@@ -2,14 +2,8 @@ const express = require("express");
 const cowsay = require("cowsay");
 const cors = require("cors");
 const path = require("path");
-var http = require("http");
-
 // Create the server
 const app = express();
-const drinkCoffee = setInterval(function() {
-  console.log('Started');
-  http.get("https://mock-api-1900.herokuapp.com");
-}, 600000);
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "client/build")));
@@ -36,6 +30,7 @@ app.get("/api/cow/", cors(), async (req, res, next) => {
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
+  console.log('called')
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
@@ -43,5 +38,4 @@ app.get("*", (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Mixing it up on port ${PORT}`);
-  drinkCoffee();
 });
