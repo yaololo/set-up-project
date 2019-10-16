@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const signupController = async function(req, res) {
   let password = req.body.password;
   if(typeof password !== 'string') {
-    return res.status(401).json({ error: { type: 'Validation Error', msg: 'password must be a string' } })
+    return res.status(401).json({ error: { type: 'Validation Error', msg: 'password must be a string' } });
   }
 
   let user = new User();
@@ -15,10 +15,12 @@ const signupController = async function(req, res) {
 
   try {
     await user.save();
+    console.log(user)
     let userInfo = user.toJSON();
+    console.log(userInfo)
     let token = jwt.sign(userInfo, process.env.PRIVATE_KEY,  { expiresIn: '2h' });
 
-    // set token to cookie
+    // set token to cookie, lax is to only allow top level navigation
     res.cookie('token', token, { httpOnly: true, sameSite: 'Lax' });
     return res.send({ userInfo });
   } catch (error) {

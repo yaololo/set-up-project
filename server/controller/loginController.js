@@ -18,11 +18,12 @@ const loginController = async (req, res) => {
     if(!isValidPassword) {
       return res.status(401).json({ error: { type: 'Validation Error', msg: 'Wrong password' } });
     }
-
+    
+    console.log(user.sdfdf);
+    console.log(user.asdfsa());
     return res.status(200).json({ success: { msg: 'Login successful', userInfo: user.toJSON() } });
   } catch (error) {
     let formattedError = formatDbError(error);
-    console.log(error);
     return res.status(401).json({ error: formattedError });
   }
 }

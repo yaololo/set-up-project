@@ -13,8 +13,10 @@
     "start:client": "cd client && yarn start",
     "start:server:dev": "nodemon index.js",
     "heroku-postbuild": "yarn build",
-    "start:db": "mongod --dbpath server/db/data"
+    "start:db": "mongod --dbpath server/db/data",
+    "server-shutdown": "mongod --dbpath server/db/data --shutdown"
   },
+
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",

@@ -27,12 +27,13 @@ UserSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.hashedPassword);
 };
 
-UserSchema.methods.toJson = function() {
-  return {
-    name: this.name,
-    email: this.email,
-    picture: this.picture
-  }
-};
+// UserSchema.methods.toJson = function() {
+//   console.log('triggered');
+//   return {
+//     name: this.name,
+//     email: this.email,
+//     // picture: this.picture
+//   }
+// };
 
 module.exports = mongoose.model("User", UserSchema);
