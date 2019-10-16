@@ -1,15 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-// import {
-//   Container,
-//   Col,
-//   Form,
-//   FormGroup,
-//   InputGroup,
-//   Button,
-//   FormControl
-// } from "react-bootstrap";
-
 import {
   Container,
   Col,
