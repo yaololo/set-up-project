@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -24,7 +27,7 @@ app.get("*", (req, res) => {
 // Choose the port and start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Mixing it up on port ${PORT}`);
+  console.log(`Server start on port ${PORT}`);
 
   db.on("error", console.error.bind(console, "MongoDB connection error:"));
   db.once("open", () => {
