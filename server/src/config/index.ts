@@ -1,4 +1,5 @@
 import { envConfig } from "./env-config";
+import db from "./db-setup";
 
 if (envConfig.isLocal) {
   require("dotenv").config();
@@ -8,4 +9,4 @@ if (envConfig.isLocal) {
    */
 }
 
-export { envConfig };
+export { envConfig, db };
