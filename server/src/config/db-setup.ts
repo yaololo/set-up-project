@@ -9,8 +9,8 @@ const options = {
 };
 
 mongoose
-  .connect(process.env.DB_PATH, options)
-  .catch(error => console.log(error));
+  .connect(process.env.DB_PATH!, options)
+  .catch((error: any) => console.log(error));
 
 const db = mongoose.connection;
 
