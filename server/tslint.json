@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:recommended"],
+  "extends": ["tslint-immutable"],
   "rules": {
     "no-var-keyword": true,
     "no-parameter-reassignment": true,
@@ -86,7 +86,7 @@
       "check-finally",
       "check-whitespace"
     ],
-    "quotemark": [true, "single", "avoid-escape"],
+    "quotemark": [true, "double", "avoid-escape"],
     "semicolon": [true, "always"],
     "variable-name": [
       false,
