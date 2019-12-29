@@ -18,12 +18,12 @@ const UserSchema = new Schema({
   date: { type: Date, default: Date.now }
 });
 
-UserSchema.methods.setHashedPassword = function(password) {
+UserSchema.methods.setHashedPassword = function(password: string) {
   const salt = bcrypt.genSaltSync(SALT_ROUND);
   this.hashedPassword = bcrypt.hashSync(password, salt);
 };
 
-UserSchema.methods.validPassword = function(password) {
+UserSchema.methods.validPassword = function(password: string) {
   return bcrypt.compareSync(password, this.hashedPassword);
 };
 
