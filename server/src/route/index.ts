@@ -1,4 +1,6 @@
-import { routes } from "lib/router";
-routes.use("/api", require("./api"));
+import { route } from "../lib/router";
+import { default as userRoutes } from "./user/user";
 
-export { routes };
+route.use("/api", userRoutes);
+
+export default route;
