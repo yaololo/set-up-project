@@ -1,12 +1,13 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+require("dotenv").config();
 
-import express from "express";
-import cors from "cors";
-import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import express from "express";
+
 import path from "path";
 import { db } from "./config";
+import route from "./route";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
+app.use(route);
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "client/build")));
@@ -29,8 +31,8 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server start on port ${PORT}`);
 
-  db.on("error", console.error.bind(console, "MongoDB connection error:"));
-  db.once("open", () => {
-    console.log("DB connected successfully");
-  });
+  // db.on("error", console.error.bind(console, "MongoDB connection error:"));
+  // db.once("open", () => {
+  //   console.log("DB connected successfully");
+  // });
 });
