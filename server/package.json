@@ -10,7 +10,7 @@
     "prestart": "npm run build",
     "start": "node .",
     "serve": "nodemon ./src/server.ts",
-    "start:db": "mongod --dbpath src/db/data"
+    "start:db": "mongod --dbpath ./src/db/data --port 27018"
   },
   "keywords": [],
   "author": "",
