@@ -1,4 +1,4 @@
 import express from "express";
-const routes = express.Router();
+const route = express.Router();
 
-export { routes };
+export { route };
