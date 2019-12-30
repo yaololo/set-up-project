@@ -1,5 +1,6 @@
 import { envConfig } from "./env-config";
 import db from "./db-setup";
+import { checkRequiredEnvironment } from "./utils";
 
 if (envConfig.isLocal) {
 } else if (envConfig.isTest) {
@@ -8,4 +9,4 @@ if (envConfig.isLocal) {
    */
 }
 
-export { envConfig, db };
+export { envConfig, db, checkRequiredEnvironment };

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { checkRequiredEnvironment } from "./utils";
 
 const options = {
   useUnifiedTopology: true,
@@ -7,6 +8,8 @@ const options = {
   bufferCommands: false,
   connectTimeoutMS: 30000
 };
+
+checkRequiredEnvironment(["DB_PATH"]);
 
 mongoose
   .connect(process.env.DB_PATH!, options)
