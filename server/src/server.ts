@@ -31,8 +31,8 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server start on port ${PORT}`);
 
-  // db.on("error", console.error.bind(console, "MongoDB connection error:"));
-  // db.once("open", () => {
-  //   console.log("DB connected successfully");
-  // });
+  db.on("error", console.error.bind(console, "MongoDB connection error:"));
+  db.once("open", () => {
+    console.log("DB connected successfully");
+  });
 });
