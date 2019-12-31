@@ -1,8 +1,9 @@
 import User from "../../schemas/user";
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 
 const loginController = async (req: Request, res: Response) => {
-  let password = req.body.password;
+  const password = req.body.password;
   if (typeof password !== "string") {
     return res.status(401).json({
       error: { type: "Validation Error", msg: "password must be a string" }
@@ -11,7 +12,6 @@ const loginController = async (req: Request, res: Response) => {
 
   try {
     const user = await User.findOne({ email: req.body.email });
-    console.log(user);
     if (!user) {
       return res
         .status(401)
@@ -25,9 +25,13 @@ const loginController = async (req: Request, res: Response) => {
         .json({ error: { type: "Validation Error", msg: "Wrong password" } });
     }
 
+    const userInfo = user.toJson();
+    const token = jwt.sign(userInfo, process.env.PRIVATE_KEY!);
+    res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
+
     return res
       .status(200)
-      .json({ success: { msg: "Login successful", userInfo: user.toJson() } });
+      .json({ success: { msg: "Login successful", userInfo } });
   } catch (e) {
     console.log(e);
     return res.status(401).json({ error: e });

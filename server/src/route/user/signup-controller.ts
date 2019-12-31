@@ -1,9 +1,6 @@
 import User from "../../schemas/user";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { checkRequiredEnvironment } from "../../config";
-
-checkRequiredEnvironment(["PRIVATE_KEY"]);
 
 const signupController = async function(req: Request, res: Response) {
   let password = req.body.password;
