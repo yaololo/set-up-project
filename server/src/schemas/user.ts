@@ -3,12 +3,14 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const SALT_ROUND = 10;
 
+const emailValidation = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
 const UserSchema = new Schema({
   name: String,
   email: {
     type: String,
     required: [true, "cannot be blank"],
-    match: [/\S+@\S+\.\S+/, "email format is invalid"],
+    match: [emailValidation, "email format is invalid"],
     index: true,
     unique: [true, "email already exist"],
     lowercase: true
