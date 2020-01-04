@@ -1,135 +1,136 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import {
+  Avatar,
+  Button,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { useStyles } from "./style";
 
-const LoginWrapper = styled.div`
-  .wrapper {
-    background: #50a3a2;
-    background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-    background: -moz-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-    background: -o-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-    background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+interface IFormValues {
+  email: string;
+  password: string;
+}
 
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 400px;
-    margin-top: -200px;
-    overflow: hidden;
-
-    &.form-success {
-      .container {
-        h1 {
-          transform: translateY(85px);
-        }
-      }
-    }
-  }
-
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 80px 0;
-    height: 400px;
-    text-align: center;
-
-    h1 {
-      font-size: 40px;
-      transition-duration: 1s;
-      transition-timing-function: ease-in-put;
-      font-weight: 200;
-    }
-  }
-
-  form {
-    padding: 20px 0;
-    position: relative;
-    z-index: 2;
-
-    input {
-      display: block;
-      appearance: none;
-      outline: 0;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      background-color: rgba(255, 255, 255, 0.2);
-      width: 250px;
-
-      border-radius: 3px;
-      padding: 10px 0;
-      margin: 0 auto 10px auto;
-      display: block;
-      text-align: center;
-      font-size: 18px;
-
-      color: white;
-
-      transition-duration: 0.25s;
-      font-weight: 300;
-
-      &::placeholder {
-        color: white;
-        opacity: 1; /* Firefox */
-      }
-
-      &:-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color: white;
-      }
-
-      &::-ms-input-placeholder {
-        /* Microsoft Edge */
-        color: white;
-      }
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.4);
-      }
-
-      &:focus {
-        background-color: white;
-        width: 300px;
-
-        color: #53e3a6;
-      }
-    }
-
-    button {
-      appearance: none;
-      outline: 0;
-      background-color: white;
-      border: 0;
-      padding: 10px 15px;
-      color: #53e3a6;
-      border-radius: 3px;
-      width: 250px;
-      cursor: pointer;
-      font-size: 18px;
-      transition-duration: 0.25s;
-
-      &:hover {
-        background-color: rgb(245, 247, 249);
-      }
-    }
-  }
-`;
+const Copyright = () => {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link
+        color="inherit"
+        href="#"
+        onClick={(e: React.MouseEvent) => e.preventDefault()}
+      >
+        No Copyright
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+};
 
 const Login = () => {
-  return (
-    <LoginWrapper>
-      <div className="wrapper">
-        <div className="container">
-          <h1>Welcome</h1>
+  const classes = useStyles();
+  const [formValues, setFormValues] = useState<IFormValues>({
+    email: "",
+    password: ""
+  });
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
-          <form className="form">
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
-            <button type="submit" id="login-button">
-              Login
-            </button>
-          </form>
-        </div>
+  const emailValidationRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+  const handleOnChange = (fieldName: keyof IFormValues) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFormValues({ ...formValues, [fieldName]: event.target.value });
+  };
+
+  const handleSubmit = () => {};
+
+  const emailValidation = () => {
+    const { email } = formValues;
+    const isValid = emailValidationRegex.test(email.toLowerCase());
+
+    if (!isValid) {
+      setErrorMsg("Invalid email format");
+    } else {
+      setErrorMsg("");
+    }
+  };
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Welcome to Mock API
+        </Typography>
+        <form className={classes.form} onSubmit={handleSubmit}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Email Address"
+            autoComplete="email"
+            autoFocus
+            onChange={handleOnChange("email")}
+            onBlur={emailValidation}
+            value={formValues.email}
+            helperText={errorMsg}
+            error={errorMsg ? true : false}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            value={formValues.password}
+            onChange={handleOnChange("password")}
+          />
+          {/* <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          /> */}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
       </div>
-    </LoginWrapper>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
+    </Container>
   );
 };
 
