@@ -13,7 +13,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useStyles } from "./style";
 import { IFormValues } from "interface/login";
 import { useObserver } from "mobx-react";
-import loginStore from "store/user";
 import userStore from "store/user";
 import Copyright from "./copyright";
 import Notification from "components/public/notification";
@@ -65,10 +64,6 @@ const Login = () => {
     if (!result) {
       setVisible(true);
     }
-  }, []);
-
-  useEffect(() => {
-    login();
   }, []);
 
   return useObserver(() => (

@@ -13,6 +13,7 @@ class UserStore {
       return true;
     } catch (e) {
       console.log(e);
+      return false;
       // return e as ICustomizedError;
     }
   };
