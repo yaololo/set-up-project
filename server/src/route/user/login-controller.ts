@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 const loginController = async (req: Request, res: Response) => {
-  const { password, email } = req.body.password;
+  const { password, email } = req.body;
 
   try {
     const errMsg = "Username or password is wrong!";
