@@ -12,6 +12,11 @@ const Routes = () => {
           path="/"
           component={LazyLoading(() => import("components/login"))}
         />
+        <Route
+          exact
+          path="/main/dashboard"
+          component={LazyLoading(() => import("components/main"))}
+        />
       </Suspense>
     </Switch>
   );
