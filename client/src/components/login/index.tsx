@@ -59,12 +59,12 @@ const Login = () => {
     }
   };
 
-  const login = useCallback(async () => {
+  const login = async () => {
     const result = await userStore.login(formValues);
     if (!result) {
       setVisible(true);
     }
-  }, []);
+  };
 
   return useObserver(() => (
     <Container component="main" maxWidth="xs">
