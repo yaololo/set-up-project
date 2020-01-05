@@ -15,23 +15,7 @@ import { IFormValues } from "interface/login";
 import { useObserver } from "mobx-react";
 import loginStore from "store/user";
 import userStore from "store/user";
-
-const Copyright = () => {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link
-        color="inherit"
-        href="#"
-        onClick={(e: React.MouseEvent) => e.preventDefault()}
-      >
-        No Copyright
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-};
+import Copyright from "./copyright";
 
 const Login = () => {
   const classes = useStyles();
