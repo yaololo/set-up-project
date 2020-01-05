@@ -16,6 +16,7 @@ import { useObserver } from "mobx-react";
 import loginStore from "store/user";
 import userStore from "store/user";
 import Copyright from "./copyright";
+import Notification from "components/public/notification";
 
 const Login = () => {
   const classes = useStyles();
@@ -24,6 +25,7 @@ const Login = () => {
     password: ""
   });
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const [visible, setVisible] = useState<boolean>(false);
 
   const emailValidationRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
@@ -37,7 +39,7 @@ const Login = () => {
     e.preventDefault();
     const isValid = formValidation();
     if (isValid) {
-      loginStore.login(formValues);
+      login();
     }
   };
 
@@ -59,7 +61,10 @@ const Login = () => {
   };
 
   const login = useCallback(async () => {
-    await userStore.login(formValues);
+    const result = await userStore.login(formValues);
+    if (!result) {
+      setVisible(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -131,6 +136,12 @@ const Login = () => {
       <Box mt={8}>
         <Copyright />
       </Box>
+      <Notification
+        variant={"error"}
+        message="Username or password is wrong!"
+        visible={visible}
+        setVisible={setVisible}
+      />
     </Container>
   ));
 };
