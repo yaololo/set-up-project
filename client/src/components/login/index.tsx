@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Box,
@@ -13,11 +11,10 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useStyles } from "./style";
-
-interface IFormValues {
-  email: string;
-  password: string;
-}
+import { IFormValues } from "interface/login";
+import { useObserver } from "mobx-react";
+import loginStore from "store/user";
+import userStore from "store/user";
 
 const Copyright = () => {
   return (
@@ -52,7 +49,17 @@ const Login = () => {
     setFormValues({ ...formValues, [fieldName]: event.target.value });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isValid = formValidation();
+    if (isValid) {
+      loginStore.login(formValues);
+    }
+  };
+
+  const formValidation = () => {
+    return emailValidation();
+  };
 
   const emailValidation = () => {
     const { email } = formValues;
@@ -60,12 +67,22 @@ const Login = () => {
 
     if (!isValid) {
       setErrorMsg("Invalid email format");
+      return false;
     } else {
       setErrorMsg("");
+      return true;
     }
   };
 
-  return (
+  const login = useCallback(async () => {
+    await userStore.login(formValues);
+  }, []);
+
+  useEffect(() => {
+    login();
+  }, []);
+
+  return useObserver(() => (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -131,7 +148,7 @@ const Login = () => {
         <Copyright />
       </Box>
     </Container>
-  );
+  ));
 };
 
 export default Login;
