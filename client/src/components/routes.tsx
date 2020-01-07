@@ -1,25 +1,24 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import LazyLoading from "components/public/lazy-loading";
-import Loading from "components/public/loading";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-const Routes = () => {
+const Routes: React.FC<RouteComponentProps> = props => {
   return (
     <Switch>
-      <Suspense fallback={<Loading></Loading>}>
-        <Route
-          exact
-          path="/"
-          component={LazyLoading(() => import("components/login"))}
-        />
-        <Route
-          exact
-          path="/main/dashboard"
-          component={LazyLoading(() => import("components/main"))}
-        />
-      </Suspense>
+      <Route
+        exact
+        path="/"
+        component={LazyLoading(() => import("components/login"))}
+      />
+      <Route
+        exact
+        path="/main/dashboard"
+        component={LazyLoading(() => import("components/main"))}
+      />
+      <Route component={() => <Redirect to={"/"} />} />
     </Switch>
   );
 };
 
-export default Routes;
+export default withRouter(Routes);
