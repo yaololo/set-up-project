@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   // webpack will take the files from ./src/index
-  entry: ["@babel/polyfill", "./src/index"],
+  entry: ["@babel/polyfill", "./src/index.tsx"],
 
   // entry: {
   //   bundle: "./index.tsx"
@@ -20,12 +20,21 @@ module.exports = {
   //   // `publicPath` is where Webpack will load your bundles from (optional)
   //   publicPath: "dist/"
   // },
+  output: {
+    filename: `static/js/[name].[${
+      process.env.NODE_ENV === "production" ? "chunkhash" : "hash"
+    }].js`,
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/"
+  },
 
   // adding .ts and .tsx to resolve.extensions will help babel look for .ts and .tsx files to transpile
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     extensions: [".ts", ".tsx", ".js"],
     alias: {
+      image: path.resolve(__dirname, "src/assets/image"),
+      svg: path.resolve(__dirname, "src/assets/svg"),
       "@": path.resolve(__dirname, "src")
     }
   },
@@ -54,18 +63,18 @@ module.exports = {
     // headers: {
     //   "Service-Worker-Allowed": "/"
     // },
-    // historyApiFallback: {
-    //   rewrites: [
-    //     {
-    //       from: /^\/$/,
-    //       to: "/index.html"
-    //     },
-    //     {
-    //       from: /./,
-    //       to: "/index.html"
-    //     }
-    //   ]
-    // },
+    historyApiFallback: {
+      rewrites: [
+        {
+          from: /^\/$/,
+          to: "/index.html"
+        },
+        {
+          from: /./,
+          to: "/index.html"
+        }
+      ]
+    },
     // inline: true,
     // watchOptions: {
     //   watch: true
