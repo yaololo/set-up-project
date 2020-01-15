@@ -14,7 +14,7 @@ import { useStyles } from "./style";
 import { IFormValues } from "interface/login";
 import { useObserver } from "mobx-react";
 import userStore from "store/user";
-import Copyright from "./copyright";
+import Copyright from "components/common/copyright";
 import Notification from "components/public/notification";
 
 const Login = () => {
