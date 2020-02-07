@@ -12,8 +12,7 @@ const Routes: React.FC<RouteComponentProps> = props => {
         component={LazyLoading(() => import("components/login"))}
       />
       <Route
-        exact
-        path="/main/dashboard"
+        path="/main"
         component={LazyLoading(() => import("components/main"))}
       />
       <Route component={() => <Redirect to={"/"} />} />
