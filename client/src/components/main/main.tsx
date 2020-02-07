@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Footer from "./footer";
-import { Container, Grid, Paper, Box } from "@material-ui/core";
+import { Container, Grid, Paper } from "@material-ui/core";
 import clsx from "clsx";
 import Copyright from "components/common/copyright";
+import MainRoutes from "./routes";
 
 const MainContent = () => {
   const useStyles = makeStyles(theme => {
@@ -12,13 +12,13 @@ const MainContent = () => {
       content: {
         flexGrow: 1,
         height: "100vh",
-        overflow: "auto",
-        position: "relative"
+        overflow: "auto"
       },
       container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
-        boxSizing: "border-box"
+        boxSizing: "border-box",
+        marginBottom: 38
       },
       paper: {
         padding: theme.spacing(2),
@@ -34,7 +34,8 @@ const MainContent = () => {
         bottom: 0,
         boxSizing: "border-box",
         width: "100%",
-        padding: 15
+        padding: 15,
+        backgroundColor: "#e3e3e3"
       }
     };
   });
@@ -43,25 +44,17 @@ const MainContent = () => {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
-    <main className={classes.content}>
-      <div className={classes.appBarSpacer} />
-      <Container maxWidth="lg" className={classes.container}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8} lg={9}>
-            <Paper className={fixedHeightPaper}>{/* <Chart /> */}</Paper>
-          </Grid>
-          <Grid item xs={12} md={4} lg={3}>
-            <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>{/* <Orders /> */}</Paper>
-          </Grid>
-        </Grid>
-      </Container>
+    <div style={{ position: "relative", width: "100%" }}>
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+          <MainRoutes />
+        </Container>
+      </main>
       <div className={classes.footer}>
         <Copyright />
       </div>
-    </main>
+    </div>
   );
 };
 
