@@ -3,11 +3,8 @@ import {
   FormControl,
   InputLabel,
   makeStyles,
-  createMuiTheme,
-  ThemeProvider,
   Button,
-  Dialog,
-  DialogTitle
+  Dialog
 } from "@material-ui/core";
 import { NormalInput } from "components/public/customized-input";
 import { lightBlue } from "@material-ui/core/colors";
@@ -22,19 +19,6 @@ const useStyles = makeStyles(theme => ({
     color: "white"
   }
 }));
-
-const buttonTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: lightBlue[400]
-    }
-  },
-  typography: {
-    button: {
-      textTransform: "none"
-    }
-  }
-});
 
 interface IForm {
   oldPassword: string;
@@ -120,18 +104,16 @@ const ChangePassword = () => {
               onChange={handleOnChange("retypePassword")}
             />
           </FormControl>
-          <ThemeProvider theme={buttonTheme}>
-            <FormControl className={passwordStyle.formControl}>
-              <Button
-                variant="contained"
-                color="primary"
-                className={passwordStyle.button}
-                type={"submit"}
-              >
-                Update
-              </Button>
-            </FormControl>
-          </ThemeProvider>
+          <FormControl className={passwordStyle.formControl}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={passwordStyle.button}
+              type={"submit"}
+            >
+              Update
+            </Button>
+          </FormControl>
         </form>
       </Dialog>
     </>
