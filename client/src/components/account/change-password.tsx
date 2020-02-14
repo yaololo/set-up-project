@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import {
-  FormControl,
-  InputLabel,
+  Paper,
   makeStyles,
   Button,
-  Dialog
+  Dialog,
+  TextField,
+  Divider
 } from "@material-ui/core";
-import { NormalInput } from "components/public/customized-input";
 import { lightBlue } from "@material-ui/core/colors";
 import ModalTitle from "components/public/customized-modal-title";
 
 const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1, 1, 1, 0)
-  },
   button: {
-    marginTop: theme.spacing(3),
-    color: "white"
+    margin: theme.spacing(2, 1),
+    textAlign: "right"
+  },
+  paper: {
+    margin: theme.spacing(2),
+    minWidth: 400
+  },
+  formInput: {
+    margin: theme.spacing(2, 1)
   }
 }));
 
@@ -40,7 +44,12 @@ const ChangePassword = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Handle Submit form
+    if (!validateRetypedPassword()) {
+      setError(true);
+    } else {
+      setError(false);
+      // handle submit
+    }
   };
 
   const handleOnChange = (fieldName: keyof IForm) => (
@@ -49,71 +58,76 @@ const ChangePassword = () => {
     setFormValues({ ...formValues, [fieldName]: event.target.value });
   };
 
+  const validateRetypedPassword = (): boolean => {
+    const { newPassword, retypePassword } = formValues;
+    return newPassword === retypePassword;
+  };
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setError(false);
+  };
+
   return (
     <>
       <Button
         variant="outlined"
-        color="primary"
+        color="secondary"
         onClick={() => setIsVisible(true)}
       >
         Change Password
       </Button>
       <Dialog
-        onClose={() => setIsVisible(false)}
+        onClose={() => handleClose()}
         aria-labelledby="customized-dialog-title"
         open={isVisible}
       >
-        <ModalTitle
-          id="customized-dialog-title"
-          onClose={() => setIsVisible(false)}
-        >
-          Change Password
-        </ModalTitle>
-
+        <ModalTitle onClose={() => handleClose()}>Change Password</ModalTitle>
+        <Divider />
         <form onSubmit={onSubmit}>
-          <FormControl className={passwordStyle.formControl}>
-            <InputLabel shrink htmlFor="old-password">
-              Old Password
-            </InputLabel>
-            <NormalInput
-              id="old-password"
-              placeholder="Old Password"
-              required
-              onChange={handleOnChange("oldPassword")}
-            />
-          </FormControl>
-          <FormControl className={passwordStyle.formControl}>
-            <InputLabel shrink htmlFor="new-password">
-              New Password
-            </InputLabel>
-            <NormalInput
-              id="new-password"
-              placeholder="New Password"
-              required
-              onChange={handleOnChange("newPassword")}
-            />
-          </FormControl>
-          <FormControl className={passwordStyle.formControl}>
-            <InputLabel shrink htmlFor="retype-password">
-              Retype New Password
-            </InputLabel>
-            <NormalInput
-              id="retype-password"
-              placeholder="Retype Password"
-              required
-              onChange={handleOnChange("retypePassword")}
-            />
-          </FormControl>
-          <FormControl className={passwordStyle.formControl}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={passwordStyle.button}
-              type={"submit"}
-            >
-              Update
-            </Button>
-          </FormControl>
+          <Paper elevation={0} className={passwordStyle.paper}>
+            <div className={passwordStyle.formInput}>
+              <TextField
+                label="Old Password"
+                autoFocus
+                variant="outlined"
+                required
+                fullWidth
+                size="small"
+                onChange={handleOnChange("oldPassword")}
+              />
+            </div>
+            <div className={passwordStyle.formInput}>
+              <TextField
+                label="New Password"
+                variant="outlined"
+                required
+                fullWidth
+                size="small"
+                type="password"
+                error={error}
+                onChange={handleOnChange("newPassword")}
+              />
+            </div>
+            <div className={passwordStyle.formInput}>
+              <TextField
+                label="Confirm New Password"
+                variant="outlined"
+                required
+                fullWidth
+                error={error}
+                size="small"
+                type="password"
+                helperText={error ? "New password does not match" : ""}
+                onChange={handleOnChange("retypePassword")}
+              />
+            </div>
+            <div className={passwordStyle.button}>
+              <Button variant="contained" color="secondary" type="submit">
+                Update
+              </Button>
+            </div>
+          </Paper>
         </form>
       </Dialog>
     </>
