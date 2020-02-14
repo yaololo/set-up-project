@@ -4,12 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "bundle": "webpack",
     "test": "jest",
     "test-watch": "jest --watch",
-    "start": "webpack-dev-server --mode development --hot",
-    "build": "webpack --mode production",
-    "check-types": "tsc"
+    "dev": "webpack-dev-server --mode development --hot",
+    "build": "webpack --mode production"
   },
   "author": "zhuang yongming",
   "license": "ISC",
@@ -39,11 +37,11 @@
     "tslint": "^5.20.1",
     "tslint-immutable": "^6.0.1",
     "typescript": "^3.7.3",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
     "@material-ui/core": "^4.8.2",
     "@material-ui/icons": "^4.5.1",
     "@types/react": "^16.9.16",
