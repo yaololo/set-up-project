@@ -1,8 +1,6 @@
-# ignore Node modules
-node_modules
+node_modules/
+dist/
 
-# Ignore local database
-server/db
-
-# env variables
 .env
+
+server/src/db

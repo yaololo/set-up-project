@@ -1,34 +1,21 @@
 {
   "name": "set-up-project",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "repository": "git@github.com:yaololo/set-up-project.git",
-  "author": "zhuangyongming <yongming.zhuang@moneysmart.com>",
-  "license": "MIT",
   "scripts": {
-    "install": "cd client&&yarn",
-    "test": "cd client&&yarn test",
-    "build": "cd client && yarn install && yarn build",
-    "start": "node index.js",
-    "start:client": "cd client && yarn start",
-    "start:server:dev": "nodemon index.js",
-    "heroku-postbuild": "yarn build",
-    "start:db": "mongod --dbpath server/db/data"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd client&&npm install",
+    "start": "cd client&&npm start"
   },
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "nodemon": "^1.19.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yaololo/set-up-project.git"
   },
-  "devDependencies": {
-    "eslint-config-react-app": "^4.0.0",
-    "eslint-plugin-react": "^7.13.0"
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yaololo/set-up-project/issues"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules",
-    "server/node_modules"
-  ]
+  "homepage": "https://github.com/yaololo/set-up-project#readme"
 }
