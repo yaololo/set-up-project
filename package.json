@@ -9,7 +9,7 @@
     "preinstall": "cd client&&npm ci",
     "dev": "cd client&&npm run dev",
     "start": "cd server&&npm start",
-    "prestart": "cd client&&npm run build"
+    "heroku-postbuild": "cd client&&npm run build"
   },
   "repository": {
     "type": "git",
