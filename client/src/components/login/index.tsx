@@ -36,14 +36,10 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isValid = formValidation();
+    const isValid = emailValidation();
     if (isValid) {
       login();
     }
-  };
-
-  const formValidation = () => {
-    return emailValidation();
   };
 
   const emailValidation = () => {
