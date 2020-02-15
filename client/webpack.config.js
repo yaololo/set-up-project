@@ -21,10 +21,8 @@ module.exports = {
   //   publicPath: "dist/"
   // },
   output: {
-    filename: `static/js/[name].[${
-      process.env.NODE_ENV === "production" ? "chunkhash" : "hash"
-    }].js`,
-    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist")
     publicPath: "/"
   },
 
