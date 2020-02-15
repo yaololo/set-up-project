@@ -7,6 +7,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "dev": "webpack-dev-server --mode development --hot",
+    "start": "webpack-dev-server --mode production",
     "build": "webpack --mode production"
   },
   "author": "zhuang yongming",
