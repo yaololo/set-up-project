@@ -23,10 +23,10 @@
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
     "typescript": "^3.7.3",
-    "tslint-immutable": "^6.0.1",
-    "webpack-dev-server": "^3.9.0"
+    "tslint-immutable": "^6.0.1"
   },
   "dependencies": {
+    "webpack-dev-server": "^3.9.0",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
     "source-map-loader": "^0.2.4",
