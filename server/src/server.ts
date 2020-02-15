@@ -26,6 +26,10 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname + "../../client/dist", "index.html"));
 });
 
+app.get("/main", (req, res) => {
+  res.sendFile(path.join(__dirname + "../../client/dist", "index.html"));
+});
+
 // Choose the port and start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
