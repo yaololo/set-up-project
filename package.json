@@ -8,8 +8,8 @@
     "install": "cd server&&npm ci",
     "preinstall": "cd client&&npm ci",
     "dev": "cd client&&npm run dev",
-    "start": "cd client&&npm start",
-    "heroku-postbuild": "cd client&&npm run build"
+    "heroku-postbuild": "cd client&&npm run build",
+    "start": "cd server&&npm start"
   },
   "repository": {
     "type": "git",
