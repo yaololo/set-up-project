@@ -19,9 +19,7 @@ app.use(cors());
 app.use(route);
 
 // Serve static files from the React frontend app
-app.use(
-  express.static(path.join(__dirname + "/../../client/dist", "index.html"))
-);
+app.use(express.static(path.join(__dirname + "/../../client/dist")));
 
 // Anything that doesn't match the above, send back index.html
 app.get("/*", (req, res) => {
