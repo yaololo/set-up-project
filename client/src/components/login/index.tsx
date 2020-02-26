@@ -16,6 +16,7 @@ import { useObserver } from "mobx-react";
 import userStore from "store/user";
 import Copyright from "components/common/copyright";
 import Notification from "components/public/notification";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const classes = useStyles();
@@ -23,10 +24,32 @@ const Login = () => {
     email: "",
     password: ""
   });
-  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
+  const [loginFailMsg, setLoginFailMsg] = useState<string>("");
 
+  const history = useHistory();
   const emailValidationRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+  const handleAfterLogin = () => {
+    history.push("/main");
+  };
+
+  const handleLogin = async () => {
+    try {
+      await userStore.login(formValues);
+      handleAfterLogin();
+    } catch (e) {
+      setVisible(true);
+      setLoginFailMsg(e.message);
+    }
+  };
+
+  useEffect(() => {
+    if (userStore.userProfile) {
+      handleAfterLogin();
+    }
+  }, []);
 
   const handleOnChange = (fieldName: keyof IFormValues) => (
     event: React.ChangeEvent<HTMLInputElement>
@@ -38,28 +61,15 @@ const Login = () => {
     e.preventDefault();
     const isValid = emailValidation();
     if (isValid) {
-      login();
+      handleLogin();
     }
   };
 
   const emailValidation = () => {
     const { email } = formValues;
     const isValid = emailValidationRegex.test(email.toLowerCase());
-
-    if (!isValid) {
-      setErrorMsg("Invalid email format");
-      return false;
-    } else {
-      setErrorMsg("");
-      return true;
-    }
-  };
-
-  const login = async () => {
-    const result = await userStore.login(formValues);
-    if (!result) {
-      setVisible(true);
-    }
+    setIsEmailValid(isValid);
+    return isValid;
   };
 
   return useObserver(() => (
@@ -83,8 +93,8 @@ const Login = () => {
             onChange={handleOnChange("email")}
             onBlur={emailValidation}
             value={formValues.email}
-            helperText={errorMsg}
-            error={errorMsg ? true : false}
+            helperText={"Invalid email format"}
+            error={!isEmailValid}
           />
           <TextField
             variant="outlined"
