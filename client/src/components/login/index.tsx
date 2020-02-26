@@ -25,31 +25,43 @@ const Login = () => {
     password: ""
   });
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
-  const [visible, setVisible] = useState<boolean>(false);
+  const [errorVisible, setErrorVisible] = useState<boolean>(false);
   const [loginFailMsg, setLoginFailMsg] = useState<string>("");
 
   const history = useHistory();
   const emailValidationRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-  const handleAfterLogin = () => {
+  const handleAfterLogin = useCallback(() => {
     history.push("/main");
-  };
+  }, []);
+
+  const handleBeforeLogin = useCallback(async () => {
+    if (!userStore.isProfileSet()) {
+      try {
+        await userStore.getProfile();
+        handleAfterLogin();
+      } catch (e) {
+        setErrorVisible(true);
+        setLoginFailMsg(e.message);
+      }
+    } else {
+      handleAfterLogin();
+    }
+  }, [userStore.userProfile]);
+
+  useEffect(() => {
+    handleBeforeLogin();
+  }, []);
 
   const handleLogin = async () => {
     try {
       await userStore.login(formValues);
       handleAfterLogin();
     } catch (e) {
-      setVisible(true);
+      setErrorVisible(true);
       setLoginFailMsg(e.message);
     }
   };
-
-  useEffect(() => {
-    if (userStore.userProfile) {
-      handleAfterLogin();
-    }
-  }, []);
 
   const handleOnChange = (fieldName: keyof IFormValues) => (
     event: React.ChangeEvent<HTMLInputElement>
@@ -139,9 +151,9 @@ const Login = () => {
       </Box>
       <Notification
         variant={"error"}
-        message="Username or password is wrong!"
-        visible={visible}
-        setVisible={setVisible}
+        message={loginFailMsg}
+        visible={errorVisible}
+        setVisible={setErrorVisible}
       />
     </Container>
   ));
