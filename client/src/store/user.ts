@@ -7,12 +7,24 @@ import { ICustomizedError } from "interface/axios";
 class UserStore {
   @observable userProfile: IUserProfile | null = null;
 
-  isLogin = () => this.userProfile;
+  isProfileSet = () => !!this.userProfile;
 
   login = (payload: IFormValues) => {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await ajax.post<IUserProfile>("/user/login", payload);
+        this.setUserProfile(response.data);
+        return resolve(response);
+      } catch (e) {
+        return reject(e as ICustomizedError);
+      }
+    });
+  };
+
+  getProfile = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await ajax.get<IUserProfile>("/user/profile");
         this.setUserProfile(response.data);
         return resolve(response);
       } catch (e) {
