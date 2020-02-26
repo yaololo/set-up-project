@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { ICustomizedError } from "interface/axios";
 
 const ajax = axios.create({
@@ -13,7 +13,7 @@ const responseInterceptor = (res: AxiosResponse) => {
 
 const errInterceptor = (e: any): Promise<ICustomizedError> => {
   let errMsg = "";
-  let statusCode: number | undefined = undefined;
+  let statusCode: number = 500;
 
   if (e.response) {
     // The request was made and the server responded with a status code
@@ -29,7 +29,7 @@ const errInterceptor = (e: any): Promise<ICustomizedError> => {
     // Something happened in setting up the request that triggered an e
     errMsg = e.message;
   }
-  return Promise.reject({ code: statusCode, message: errMsg });
+  return Promise.reject({ status: statusCode, message: errMsg });
 };
 
 ajax.interceptors.response.use(responseInterceptor, errInterceptor);
