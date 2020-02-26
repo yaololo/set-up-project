@@ -9,14 +9,16 @@ class UserStore {
 
   isLogin = () => this.userProfile;
 
-  login = async (payload: IFormValues) => {
-    try {
-      const response = await ajax.post<IUserProfile>("/user/login", payload);
-      this.setUserProfile(response.data);
-      return response;
-    } catch (e) {
-      return e as ICustomizedError;
-    }
+  login = (payload: IFormValues) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await ajax.post<IUserProfile>("/user/login", payload);
+        this.setUserProfile(response.data);
+        return resolve(response);
+      } catch (e) {
+        return reject(e as ICustomizedError);
+      }
+    });
   };
 
   @action setUserProfile = (profile: IUserProfile | null) => {
