@@ -4,12 +4,6 @@ import jwt from "jsonwebtoken";
 
 const signupController = async function(req: Request, res: Response) {
   let password = req.body.password;
-  if (typeof password !== "string") {
-    return res.status(401).json({
-      error: { type: "Validation Error", msg: "password must be a string" }
-    });
-  }
-
   let user = new User();
   user.email = req.body.email;
   user.name = req.body.name;
@@ -24,9 +18,7 @@ const signupController = async function(req: Request, res: Response) {
     res.cookie("token", token, { httpOnly: true, sameSite: "lax" });
     return res.send({ userInfo });
   } catch (e) {
-    console.log(e);
-    // let formattedError = formatDbError(error);
-    return res.status(401).json({ error: e });
+    return res.status(401).json({ message: e });
   }
 };
 
