@@ -23,8 +23,7 @@ const loginController = async (req: Request, res: Response) => {
 
     return res.status(200).json(userInfo);
   } catch (e) {
-    console.log(e);
-    return res.status(401).json({ error: e });
+    return res.status(401).json({ message: JSON.stringify(e) });
   }
 };
 export default loginController;
