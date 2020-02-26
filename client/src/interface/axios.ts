@@ -1,6 +1,6 @@
 interface ICustomizedError {
-  code: number | undefined;
   message: string;
+  status: number;
 }
 
 export { ICustomizedError };
