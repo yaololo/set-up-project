@@ -2,6 +2,7 @@ import { observable, action } from "mobx";
 import { IFormValues } from "interface/login";
 import { ajax } from "lib/axios";
 import { IUserProfile } from "interface/user";
+import { ICustomizedError } from "interface/axios";
 
 class UserStore {
   @observable userProfile: IUserProfile | null = null;
@@ -10,12 +11,11 @@ class UserStore {
 
   login = async (payload: IFormValues) => {
     try {
-      await ajax.post("/user/login", payload);
-      return true;
+      const response = await ajax.post<IUserProfile>("/user/login", payload);
+      this.setUserProfile(response.data);
+      return response;
     } catch (e) {
-      console.log(e);
-      return false;
-      // return e as ICustomizedError;
+      return e as ICustomizedError;
     }
   };
 
