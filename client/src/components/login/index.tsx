@@ -35,21 +35,16 @@ const Login = () => {
     history.push("/main");
   }, []);
 
-  const handleBeforeLogin = useCallback(async () => {
+  const handleBeforeLogin = useCallback(() => {
     if (!userStore.isProfileSet()) {
-      try {
-        await userStore.getProfile();
-        handleAfterLogin();
-      } catch (e) {
-        setErrorVisible(true);
-        setLoginFailMsg(e.message);
-      }
+      userStore.getProfile().then(() => handleAfterLogin());
     } else {
       handleAfterLogin();
     }
   }, [userStore.userProfile]);
 
   useEffect(() => {
+    // Verify token on page load
     handleBeforeLogin();
   }, []);
 
