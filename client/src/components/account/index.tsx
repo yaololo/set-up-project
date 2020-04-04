@@ -35,12 +35,6 @@ const useStyles = makeStyles(theme => ({
 
 const Account = () => {
   const classes = useStyles();
-  useEffect(() => {
-    return () => {
-      console.log("component unmounting");
-    };
-  }, []);
-
   return (
     <Paper className={classes.form}>
       <Typography variant="h6">Account Settings</Typography>

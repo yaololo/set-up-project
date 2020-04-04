@@ -1,8 +1,4 @@
-console.log("node env: ", process.env.NODE_ENV);
-console.log("db path: ", process.env.DB_PATH);
-
 if (process.env.NODE_ENV !== "production") {
-  console.log("in develop");
   require("dotenv").config();
 }
 
