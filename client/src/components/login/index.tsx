@@ -79,6 +79,11 @@ const Login = () => {
     return isValid;
   };
 
+  const handleSignUp = (e: React.MouseEvent) => {
+    e.preventDefault();
+    history.push("/signup");
+  };
+
   return useObserver(() => (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -134,7 +139,7 @@ const Login = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="#" variant="body2" onClick={handleSignUp}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

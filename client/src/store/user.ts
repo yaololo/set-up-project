@@ -27,9 +27,7 @@ class UserStore {
         const response = await ajax.get<IUserProfile>("/user/profile");
         this.setUserProfile(response.data);
         return resolve(response);
-      } catch (e) {
-        return reject(e as ICustomizedError);
-      }
+      } catch (e) {}
     });
   };
 
