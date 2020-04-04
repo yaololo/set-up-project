@@ -108,7 +108,7 @@ const Login = () => {
             onChange={handleOnChange("email")}
             onBlur={emailValidation}
             value={formValues.email}
-            helperText={"Invalid email format"}
+            helperText={isEmailValid ? null : "Invalid email format"}
             error={!isEmailValid}
           />
           <TextField
