@@ -5,8 +5,8 @@ const GlobalStyle = createGlobalStyle`
   ${styledNormalize}
 
   #root {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow: auto;
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
