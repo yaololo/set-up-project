@@ -37,7 +37,10 @@ const Login = () => {
 
   const handleBeforeLogin = useCallback(() => {
     if (!userStore.isProfileSet()) {
-      userStore.getProfile().then(() => handleAfterLogin());
+      userStore
+        .getProfile()
+        .then(() => handleAfterLogin())
+        .catch(() => {});
     } else {
       handleAfterLogin();
     }
