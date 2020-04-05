@@ -55,6 +55,7 @@ module.exports = {
       }
     ]
   },
+  devtool: "inline-source-map", // debugging
   devServer: {
     // contentBase: path.resolve(__dirname, "dist"),
     // publicPath: "/",
