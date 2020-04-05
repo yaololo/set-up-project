@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import LazyLoading from "components/public/lazy-loading";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
-const Routes: React.FC<RouteComponentProps> = props => {
+const Routes: React.FC<RouteComponentProps> = () => {
   return (
     <Switch>
       <Route
