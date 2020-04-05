@@ -7,14 +7,14 @@ import {
   Grid,
   Box,
   Typography,
-  Container
+  Container,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useStyles } from "./style";
 import { IFormValues } from "interface/login";
 import { useObserver } from "mobx-react";
 import userStore from "store/user";
-import Copyright from "components/common/copyright";
+import Copyright from "@/components/public/copyright";
 import Notification from "components/public/notification";
 import { useHistory } from "react-router-dom";
 
@@ -22,7 +22,7 @@ const Login = () => {
   const classes = useStyles();
   const [formValues, setFormValues] = useState<IFormValues>({
     email: "",
-    password: ""
+    password: "",
   });
   const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
   const [errorVisible, setErrorVisible] = useState<boolean>(false);

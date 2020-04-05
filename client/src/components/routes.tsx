@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import LazyLoading from "components/public/lazy-loading";
 import { withRouter, RouteComponentProps } from "react-router-dom";

@@ -1,33 +1,33 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Paper } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import clsx from "clsx";
-import Copyright from "components/common/copyright";
+import Copyright from "components/public/copyright";
 import MainRoutes from "./routes";
 
 const MainContent = () => {
-  const useStyles = makeStyles(theme => {
+  const useStyles = makeStyles((theme) => {
     return {
       appBarSpacer: theme.mixins.toolbar,
       content: {
         flexGrow: 1,
         height: "100vh",
-        overflow: "auto"
+        overflow: "auto",
       },
       container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
         boxSizing: "border-box",
-        marginBottom: 38
+        marginBottom: 38,
       },
       paper: {
         padding: theme.spacing(2),
         display: "flex",
         overflow: "auto",
-        flexDirection: "column"
+        flexDirection: "column",
       },
       fixedHeight: {
-        height: 240
+        height: 240,
       },
       footer: {
         position: "absolute",
@@ -35,13 +35,12 @@ const MainContent = () => {
         boxSizing: "border-box",
         width: "100%",
         padding: 15,
-        backgroundColor: "#e3e3e3"
-      }
+        backgroundColor: "#e3e3e3",
+      },
     };
   });
 
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div style={{ position: "relative", width: "100%" }}>

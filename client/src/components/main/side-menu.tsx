@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -81,12 +81,13 @@ const SideMenu: React.FC<IProps> = (props) => {
       </div>
       <Divider />
       <List>
-        {SIDE_MENU_DATA.map((item) => {
+        {SIDE_MENU_DATA.map((item, index) => {
           return (
             <ListItem
               button
               selected={location.pathname.includes(item.url)}
               onClick={(event) => handleListItemClick(event, item.url)}
+              key={index}
             >
               <ListItemIcon>{item.icon()}</ListItemIcon>
               <ListItemText primary={item.text} />
